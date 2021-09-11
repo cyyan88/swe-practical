@@ -1,0 +1,5 @@
+reacting/node_modules
+reacting/yarn.lock
+reacting/.env
+reacting/src/setupTests.js
+reacting/src/reportWebVitals.js
