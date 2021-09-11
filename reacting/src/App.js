@@ -1,5 +1,7 @@
 import {React, Component} from 'react'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const ACCESS_TOKEN = 'CsfADECm9bWsBConuB8CeeCPzM0xg-465U1ygw'
 
@@ -39,6 +41,7 @@ class App extends Component {
     return(
       <div className="App">
       <h1>hello</h1>
+      <Button variant="primary">Primary</Button>{' '}
     </div>
     )
   }
