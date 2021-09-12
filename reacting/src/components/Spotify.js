@@ -35,6 +35,10 @@ function Spotify() {
         fetchAPI('https://api.spotify.com/v1/audio-features/06AKEBrKUckW0KREUWRnvT', 'track')
     }
 
+    function plTracks(){
+
+    }
+
     function fetchAPI(link, type){
       const header = {
         "Accept": "application/json",
@@ -50,13 +54,14 @@ function Spotify() {
             switch(type){
               case 'track':
                 setTrack(data)
-                break
               case 'userPlaylists':
                 setUserData(data)
               case 'playlist':
                 setPlaylist(data)
+                console.log(data.tracks.items)
+                //getTrack(data.tracks.items[0].track.id)
               default:
-                console.log(data)
+                //console.log(data)
             }            
           })
     }
