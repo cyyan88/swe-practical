@@ -62,35 +62,28 @@ function Spotify() {
     }
 
     return(
-    <div className='app'>
-      {token ? (
-        <SpotifyApiContext.Provider value={token}>
-          {/* Your Spotify Code here */}
-          <p>You are authorized with token: {token}</p>
-        </SpotifyApiContext.Provider>
-      ) : (
-        // Display the login page
-        <SpotifyAuth
-          redirectUri='http://localhost:3000/callback'
-          clientID='829c9df647804f28b37c2388cf43e2b7'
-          scopes={[Scopes.userReadPrivate, 'user-read-email']} // either style will work
-        />
-      )}
+      <div className='app'>
+        {token ? (
+          <SpotifyApiContext.Provider value={token}>
+            {/* Your Spotify Code here */}
+            <p>You are authorized with token: {token}</p>
+          </SpotifyApiContext.Provider>
+        ) : (
+          // Display the login page
+          <SpotifyAuth
+            redirectUri='http://localhost:3000/callback'
+            clientID='829c9df647804f28b37c2388cf43e2b7'
+            scopes={[Scopes.userReadPrivate, 'user-read-email']} // either style will work
+          />
+        )}
 
-        {playlistData ? (<div>
-                <Playlist data={playlistData}/>
-                <Stats />
-                <Tracks />
-          </div>) : (
-              <h1>hello</h1>
-          )}
-
-
-  
-    </div>
-
+        <Playlist data={playlistData}/>
+        <Stats />
+        <Tracks />   
+      </div>
     )
-  }
+    
+}
 
     
 
