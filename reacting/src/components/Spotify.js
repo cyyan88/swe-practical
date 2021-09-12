@@ -1,10 +1,11 @@
-import {React, Component} from 'react'
-import axios from 'axios'
+import React, {useState, useEffect} from 'react'
+//import axios from 'axios'
 import { SpotifyAuth, Scopes } from 'react-spotify-auth'
 import 'react-spotify-auth/dist/index.css' // if using the included styles
+import { SpotifyApiContext } from 'react-spotify-api'
+import Cookies from 'js-cookie'
 
-
-class Spotify extends Component {
+function Spotify() {
 
 //   constructor() {
 //     super()
@@ -15,37 +16,57 @@ class Spotify extends Component {
 //     }
 
 
-  render (){
+    const [token] = useState(Cookies.get('spotifyAuthToken'))
+    
+    useEffect(() => {
+        if(token){
+            getPlaylist()
+        }
+    })
+
+    function getPlaylist(){
+        console.log("hello")
+        console.log(token)
+        const header = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            "Access-Control-Allow-Origin": "*"
+        }
+        fetch('https://api.spotify.com/v1/audio-features/06AKEBrKUckW0KREUWRnvT', {
+            method: 'GET',
+            //mode: 'no-cors',
+            headers: header
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+        
+    }
+
     return(
+
+    <div className='app'>
+      {token ? (
+        <SpotifyApiContext.Provider onLoad={getPlaylist} value={token}>
+          {/* Your Spotify Code here */}
+          <p>You are authorized with token: {token}</p>
+        </SpotifyApiContext.Provider>
+      ) : (
+        // Display the login page
         <SpotifyAuth
-        redirectUri='http://localhost:3000/callback'
-        clientID='829c9df647804f28b37c2388cf43e2b7'
-        scopes={[Scopes.userReadPrivate, Scopes.userReadEmail]}
-      />
+          redirectUri='http://localhost:3000/callback'
+          clientID='829c9df647804f28b37c2388cf43e2b7'
+          scopes={[Scopes.userReadPrivate, 'user-read-email']} // either style will work
+        />
+      )}
+    </div>
+
     )
   }
 
-//   componentDidMount() {
-//     this.setState({loading: true})
-//     fetch("https://swapi.dev/api/people/4/")
-//         .then(response => response.json())
-//         .then(data => {
-//             this.setState({
-//                 loading: false,
-//                 character: data
-//             })
-//         })
-//   }
-
-  spotifyAPI(){
-    const client_id = '829c9df647804f28b37c2388cf43e2b7' 
-    const client_secret = '1f4021bc4e574d7099a6f787ccf17466'
-    const redirect_uri = 'http://localhost:3000/callback'
-    fetch('http://example.com/movies.json')
-    .then(response => response.json())
-    .then(data => console.log(data))
-  }
     
-}
+
 
 export default Spotify
+
+
