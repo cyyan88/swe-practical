@@ -2,25 +2,7 @@ import {React, Component} from 'react'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-const ACCESS_TOKEN = 'CsfADECm9bWsBConuB8CeeCPzM0xg-465U1ygw'
-
-let data
-const headers = {
-  'User-Agent': 'CompuServe Classic/1.22',
-  'Accept': 'application/json',
-  'Host': 'api.genius.com',
-  'Authorization': `Bearer ${ACCESS_TOKEN}`
-  //"Access-Control-Allow-Origin": "*"
-}
-const getSong = async () => {
-  //data= axios.get(`https://api.genius.com/search?q=Kendrick%20Lamar`, headers)
-  data = axios.get('https://my-json-server.typicode.com/nfried16/swe-practice/weather')
-  console.log(data)
-  
-  //console.log('getweather')
-}
-getSong()
+import Spotify from './components/Spotify'
 
 class App extends Component {
 
@@ -35,12 +17,10 @@ class App extends Component {
 
   render (){
 
-  
-
-    
     return(
       <div className="App">
       <h1>hello</h1>
+      <Spotify />
       <Button variant="primary">Primary</Button>{' '}
     </div>
     )
@@ -57,6 +37,12 @@ class App extends Component {
             })
         })
   }
+
+  // spotifyAPI(){
+  //   fetch('http://example.com/movies.json')
+  //   .then(response => response.json())
+  //   .then(data => console.log(data))
+  // }
     
 }
 
