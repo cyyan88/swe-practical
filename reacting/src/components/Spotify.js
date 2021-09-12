@@ -30,8 +30,7 @@ function Spotify() {
         const header = {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "Access-Control-Allow-Origin": "*"
+            "Authorization": `Bearer ${token}`
         }
         fetch('https://api.spotify.com/v1/audio-features/06AKEBrKUckW0KREUWRnvT', {
             method: 'GET',
