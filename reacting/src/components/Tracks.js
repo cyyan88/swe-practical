@@ -1,14 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-function Tracks(props){
-   // const data = props.data
+function Tracks (props) {
+  // const data = props.data
 
-    return(
-        <div className="tracks">
-            
-        </div>
-    )
+  return (
+    <div className='tracks' />
+  )
 }
 
 export default Tracks
