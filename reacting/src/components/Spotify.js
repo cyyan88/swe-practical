@@ -82,7 +82,7 @@ class Spotify extends React.Component {
         // console.log(type)
         if (type == 'track') {
           this.updateStats(data)
-          //console.log(this.state.stats)
+          console.log(data)
 
 
         } else if (type == 'userPlaylists') { this.setState({ userData: data }) } else if (type == 'playlist') {
@@ -135,8 +135,8 @@ class Spotify extends React.Component {
           />
         )}
 
-        <Playlist data={this.state.playlistData} stats={this.state.stats} />
-        <Stats />
+        <Playlist data={this.state.playlistData}  />
+        <Stats stats={this.state.stats} len={this.state.playlistData}/>
         <Tracks />
       </div>
     )
