@@ -16,7 +16,7 @@ class Spotify extends React.Component {
   // const [playlistData, setPlaylist] = useState({})
 
   constructor () {
-    super()
+    super()  
     this.state = {
       token: Cookies.get('spotifyAuthToken'),
       trackData: {},
@@ -34,10 +34,23 @@ class Spotify extends React.Component {
         speechiness: 0,
         tempo: 0,
         valence: 0
+      },
+      avgStats: {
+        acousticness: 0,
+        danceability: 0,
+        duration_ms: 0,
+        energy: 0,
+        instrumentalness: 0,
+        liveness: 0,
+        loudness: 0,
+        speechiness: 0,
+        tempo: 0,
+        valence: 0
       }
     }
     this.fetchAPI = this.fetchAPI.bind(this)
     this.updateStats = this.updateStats.bind(this)
+    this.fetchAPI = this.fetchAPI.bind(this)
   }
 
   updateStats (track) {
@@ -69,7 +82,9 @@ class Spotify extends React.Component {
         // console.log(type)
         if (type == 'track') {
           this.updateStats(data)
-          console.log(this.state.stats)
+          //console.log(this.state.stats)
+
+
         } else if (type == 'userPlaylists') { this.setState({ userData: data }) } else if (type == 'playlist') {
           this.setState({ playlistData: data })
           // console.log(data.tracks.items)
@@ -100,6 +115,7 @@ class Spotify extends React.Component {
     tracks.items.forEach(t => {
       this.getTrack(t.track.id)
     })
+
   }
 
   render () {
