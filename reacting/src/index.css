@@ -13,5 +13,26 @@ code {
 }
 
 p{
-  line-height: 0.5em;
+  line-height: 1em;
+}
+
+.app{
+  padding: 5%;
+}
+
+.display{
+  display: inline-flex;
+}
+
+.tracks{
+  max-height: 100vh;
+  overflow-y: scroll;
+  color: white;
+  background-color: black;
+  padding: 5%;
+}
+
+.tracks > a{
+  color: white;
+  text-decoration: none;
 }

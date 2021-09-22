@@ -54,15 +54,18 @@ class Spotify extends React.Component {
   }
 
   updateStats (track) {
+    //console.log(track.danceability)
     this.setState((prev) => {
-      const newStats = prev.stats
+      let newStats = prev.stats
       Object.keys(track).forEach(s => {
-        if (prev.stats[s] != null) {
-          newStats[s] = prev.stats[s] + track[s]
+        if (newStats[s] != null) {
+          const prev = newStats[s]
+          newStats[s] = track[s] + prev
+          if(s == "danceability") console.log(prev + " " + track[s])
         }
       })
       return {
-        stats: newStats
+        stats: {...newStats}
       }
     })
   }
@@ -82,13 +85,10 @@ class Spotify extends React.Component {
         // console.log(type)
         if (type == 'track') {
           this.updateStats(data)
-          console.log(data)
-
-
-        } else if (type == 'userPlaylists') { this.setState({ userData: data }) } else if (type == 'playlist') {
+        } 
+        else if (type == 'userPlaylists') { this.setState({ userData: data }) } else if (type == 'playlist') {
           this.setState({ playlistData: data })
-          // console.log(data.tracks.items)
-          // this.setState({allTracks: data.tracks.items})
+          this.setState({allTracks: data.tracks.items})
           this.plTracks(data.tracks)
         }
       })
@@ -124,7 +124,7 @@ class Spotify extends React.Component {
         {this.state.token ? (
           <SpotifyApiContext.Provider value={this.state.token}>
             {/* Your Spotify Code here */}
-            <p>You are authorized with token: {this.state.token}</p>
+            {/* <p>You are authorized with token: {this.state.token}</p> */}
           </SpotifyApiContext.Provider>
         ) : (
         // Display the login page
@@ -135,9 +135,11 @@ class Spotify extends React.Component {
           />
         )}
 
-        <Playlist data={this.state.playlistData}  />
-        <Stats stats={this.state.stats} len={this.state.playlistData}/>
-        <Tracks />
+        <div className="display">
+          <Playlist data={this.state.playlistData}  />
+          <Stats stats={this.state.stats} len={this.state.playlistData}/>
+          <Tracks tracks={this.state.allTracks}/>
+        </div>
       </div>
     )
   }

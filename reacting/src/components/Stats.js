@@ -11,7 +11,7 @@ function Stats (props) {
   }
   if (JSON.stringify(stats) != '{}' && JSON.stringify(stats) != 'undefined') {
     const statDisplay = Object.keys(stats).map(key =>
-      <p>{`${key}: ${(stats[key]/len).toFixed(2)}`}</p>
+     <p>{`${key}: ${(stats[key]/len).toFixed(3)}`}</p>
     )
     return (
       <div className='stats'>
