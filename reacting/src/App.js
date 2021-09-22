@@ -1,6 +1,4 @@
 import { React, Component } from 'react'
-import axios from 'axios'
-import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Spotify from './components/Spotify'
 
@@ -33,11 +31,6 @@ class App extends Component {
       })
   }
 
-  // spotifyAPI(){
-  //   fetch('http://example.com/movies.json')
-  //   .then(response => response.json())
-  //   .then(data => console.log(data))
-  // }
 }
 
 export default App

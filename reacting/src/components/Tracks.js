@@ -2,8 +2,6 @@ import React from 'react'
 import { render } from 'react-dom'
 
 function Tracks (props) {
-  // const data = props.data
-
   const tracks = props.tracks
   if (JSON.stringify(tracks) != '{}' && JSON.stringify(tracks) != 'undefined') {
     const trackDisplay = tracks.map(track => 
@@ -15,7 +13,7 @@ function Tracks (props) {
       </div>
     )
   } else {
-    return (<div>stats not available</div>)
+    return (<div>Tracks not available</div>)
   }
 }
 

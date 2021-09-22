@@ -16,12 +16,17 @@ p{
   line-height: 1em;
 }
 
+div{
+  margin: 2%;
+}
+
 .app{
   padding: 5%;
 }
 
 .display{
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .tracks{
@@ -34,5 +39,8 @@ p{
 
 .tracks > a{
   color: white;
-  text-decoration: none;
+}
+
+a{
+  text-decoration: none !important;
 }

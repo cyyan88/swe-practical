@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 
 function Playlist (props) {
   const data = props.data
-  // console.log(data)
   if (JSON.stringify(data) != '{}' && JSON.stringify(data) != 'undefined') {
     return (
       <div className='playlist'>
@@ -13,7 +12,7 @@ function Playlist (props) {
       </div>
     )
   } else {
-    return (<div>loading...</div>)
+    return (<div>Playlist not loaded</div>)
   }
 }
 
