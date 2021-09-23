@@ -66,12 +66,25 @@ class Spotify extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        if (type == 'track') {
+        if(data.error) console.log('whoops')
+        else if (type == 'track') {
           this.updateStats(data)
         } 
         else if (type == 'userPlaylists') { this.setState({ userData: data }) } else if (type == 'playlist') {
+          console.log(link)
+          console.log(data)
           this.setState({ playlistData: {...data} })
           this.setState({allTracks: data.tracks.items})
+          this.setState({stats: {acousticness: 0,
+            danceability: 0,
+            duration_ms: 0,
+            energy: 0,
+            instrumentalness: 0,
+            liveness: 0,
+            loudness: 0,
+            speechiness: 0,
+            tempo: 0,
+            valence: 0}})
           this.plTracks(data.tracks)
         }
       })
@@ -107,12 +120,13 @@ class Spotify extends React.Component {
     //   link: event.target.value
     // })
   
-    let id = this.state.link.substring(34, this.state.link.indexOf("?si"))
+    let id = this.state.link.substring(this.state.link.indexOf("playlist/") + 9, this.state.link.indexOf("?si"))
     this.getPlaylist(id)
   }
 
   handleChange(event) {
-    this.setState({link: event.target.link});
+    console.log(this.state.link)
+    this.setState({link: event.target.value});
   }
 
 
@@ -123,17 +137,7 @@ class Spotify extends React.Component {
           <SpotifyApiContext.Provider value={this.state.token}>
             {/* Your Spotify Code here */}
             {/* <p>You are authorized with token: {this.state.token}</p> */}
-          </SpotifyApiContext.Provider>
-        ) : (
-        // Display the login page
-          <SpotifyAuth
-            redirectUri='http://localhost:3000/callback'
-            clientID='829c9df647804f28b37c2388cf43e2b7'
-            scopes={[Scopes.userReadPrivate, 'user-read-email']}
-          />
-        )}
-
-        <div className="display">
+            <div className="display">
 
         <form onSubmit={this.handleSubmit}>
           <input name="link" value={this.state.link} onChange={this.handleChange}/>
@@ -144,6 +148,18 @@ class Spotify extends React.Component {
           <Stats stats={this.state.stats} len={this.state.playlistData}/>
           <Tracks tracks={this.state.allTracks}/>
         </div>
+          </SpotifyApiContext.Provider>
+          
+        ) : (
+        // Display the login page
+          <SpotifyAuth
+            redirectUri='http://localhost:3000/callback'
+            clientID='829c9df647804f28b37c2388cf43e2b7'
+            scopes={[Scopes.userReadPrivate, 'user-read-email']}
+          />
+        )}
+
+        
       </div>
     )
   }

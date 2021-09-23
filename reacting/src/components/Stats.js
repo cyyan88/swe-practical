@@ -15,7 +15,9 @@ function Stats (props) {
     )
     return (
       <div className='stats'>
-        <div>{statDisplay}</div>
+        <div>
+          <p>Length: {len}</p>
+          {statDisplay}</div>
       </div>
     )
   } else {
