@@ -1,13 +1,13 @@
 import React, { Component, useState, useEffect } from 'react'
-// import axios from 'axios'
 import { SpotifyAuth, Scopes } from 'react-spotify-auth'
-import 'react-spotify-auth/dist/index.css' // if using the included styles
+import 'react-spotify-auth/dist/index.css'
 import { SpotifyApiContext } from 'react-spotify-api'
 import Cookies from 'js-cookie'
 
 import Playlist from './Playlist'
 import Stats from './Stats'
 import Tracks from './Tracks'
+import Login from './Login'
 
 class Spotify extends React.Component {
 
@@ -31,7 +31,7 @@ class Spotify extends React.Component {
         tempo: 0,
         valence: 0
       }, 
-      link: "https://open.spotify.com/playlist/0R9NxaAIIocYDoM4lZmJlI?si=68bbfad72eae49cf"
+      link: "https://open.spotify.com/playlist/37i9dQZF1DZ06evO4kAIIU?si=937547c672cd4b9b"
     }
     this.fetchAPI = this.fetchAPI.bind(this)
     this.updateStats = this.updateStats.bind(this)
@@ -66,13 +66,11 @@ class Spotify extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        if(data.error) console.log('whoops')
+        if(data.error) alert('Invalid playlist link 🤧')
         else if (type == 'track') {
           this.updateStats(data)
         } 
         else if (type == 'userPlaylists') { this.setState({ userData: data }) } else if (type == 'playlist') {
-          console.log(link)
-          console.log(data)
           this.setState({ playlistData: {...data} })
           this.setState({allTracks: data.tracks.items})
           this.setState({stats: {acousticness: 0,
@@ -95,12 +93,11 @@ class Spotify extends React.Component {
   }
 
   getPlaylist (id) {
-    console.log(id)
     this.fetchAPI(`https://api.spotify.com/v1/playlists/${id}`, 'playlist')
   }
 
   componentDidMount () {
-    if (this.state.token && JSON.stringify(this.state.playlistData) == '{}') { this.getPlaylist("0R9NxaAIIocYDoM4lZmJlI") }
+    if (this.state.token && JSON.stringify(this.state.playlistData) == '{}') { this.getPlaylist("37i9dQZF1DZ06evO4kAIIU") }
   }
 
   getTrack (id) {
@@ -114,18 +111,12 @@ class Spotify extends React.Component {
   }
 
   handleSubmit(event){
-    event.preventDefault()
-    //console.log(event.target.value)
-    // this.setState({
-    //   link: event.target.value
-    // })
-  
+    event.preventDefault()  
     let id = this.state.link.substring(this.state.link.indexOf("playlist/") + 9, this.state.link.indexOf("?si"))
     this.getPlaylist(id)
   }
 
   handleChange(event) {
-    console.log(this.state.link)
     this.setState({link: event.target.value});
   }
 
@@ -137,12 +128,16 @@ class Spotify extends React.Component {
           <SpotifyApiContext.Provider value={this.state.token}>
             {/* Your Spotify Code here */}
             {/* <p>You are authorized with token: {this.state.token}</p> */}
-            <div className="display">
+        <div className="display">
 
-        <form onSubmit={this.handleSubmit}>
-          <input name="link" value={this.state.link} onChange={this.handleChange}/>
-          <input type="submit" value="Submit" />
-        </form>
+          <div>
+          <form onSubmit={this.handleSubmit}>
+            <p>Submit a link to your playlist!</p>
+            <input name="link" value={this.state.link} onChange={this.handleChange}/>
+            <input type="submit" value="Submit" />
+          </form>
+          </div>
+          
 
           <Playlist data={this.state.playlistData}  />
           <Stats stats={this.state.stats} len={this.state.playlistData}/>
@@ -152,11 +147,14 @@ class Spotify extends React.Component {
           
         ) : (
         // Display the login page
-          <SpotifyAuth
-            redirectUri='http://localhost:3000/callback'
-            clientID='829c9df647804f28b37c2388cf43e2b7'
-            scopes={[Scopes.userReadPrivate, 'user-read-email']}
-          />
+        <div>
+            <Login />
+            <SpotifyAuth
+              redirectUri='http://localhost:3000/callback'
+              clientID='829c9df647804f28b37c2388cf43e2b7'
+              scopes={[Scopes.userReadPrivate, 'user-read-email']}
+            />
+        </div>  
         )}
 
         

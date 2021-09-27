@@ -16,6 +16,7 @@ function Stats (props) {
     return (
       <div className='stats'>
         <div>
+          <h3>Average Stats</h3>
           <p>Length: {len}</p>
           {statDisplay}</div>
       </div>

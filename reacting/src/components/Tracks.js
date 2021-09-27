@@ -9,6 +9,7 @@ function Tracks (props) {
     )
     return (
       <div className='tracks'>
+        <h3>Playlist Tracks</h3>
         {trackDisplay}
       </div>
     )

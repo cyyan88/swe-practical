@@ -3,3 +3,5 @@ reacting/yarn.lock
 reacting/.env
 reacting/src/setupTests.js
 reacting/src/reportWebVitals.js
+reacting/build
+reacting/.netlify

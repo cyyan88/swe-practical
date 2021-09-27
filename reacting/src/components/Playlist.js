@@ -7,10 +7,13 @@ function Playlist (props) {
   else if (JSON.stringify(data) != '{}' && JSON.stringify(data) != 'undefined') {
     return (
       <div className='playlist'>
-        <img src={data.images[0].url} />
-        <a href={data.external_urls.spotify} target='_blank'><h1>{data.name}</h1></a>
-        <h3>{data.description}</h3>
-        <a href={data.owner.external_urls.spotify} target='_blank'><h2>{data.owner.display_name}</h2></a>
+        <img id="playlistImg" src={data.images[0].url} />
+        <div className="info">
+          <a href={data.external_urls.spotify} target='_blank'><h1>{data.name}</h1></a>
+          <h3>{data.description}</h3>
+          <a href={data.owner.external_urls.spotify} target='_blank'><h2>{data.owner.display_name}</h2></a>
+        </div>
+        
       </div>
     )
   } else {

@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: whitesmoke !important;
+
 }
 
 code {
@@ -25,22 +27,58 @@ div{
 }
 
 .display{
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
+  color: #3d3b3b;
 }
 
 .tracks{
   max-height: 100vh;
   overflow-y: scroll;
   color: white;
-  background-color: black;
+  background-color: #191414;
   padding: 5%;
+  width: 50%;
+  min-width: 300px;
+}
+
+.stats{
+  min-width: 300px;
+}
+
+.playlist{
+  display: inline-flex;
+  flex-wrap: wrap;
 }
 
 .tracks > a{
-  color: white;
+  color: white !important;
+}
+
+a{
+  color: #191414 !important;
+}
+
+.stats{
+  background-color: #191414;
+  padding: 5%;
+  color:white;
+}
+
+#playlistImg{
+  width: 300px;
+  height: 300px;
+}
+
+.info{
+  min-width: 300px;
+  width: 50%;
 }
 
 a{
   text-decoration: none !important;
+}
+
+a:hover{
+  color: #9e9595 !important;
 }
