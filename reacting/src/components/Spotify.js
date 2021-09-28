@@ -131,7 +131,13 @@ class Spotify extends React.Component {
             {/* <p>You are authorized with token: {this.state.token}</p> */}
         <div className="display">
 
-          {/* FORM GOES HERE */}
+          <div>
+            <form id="linkForm" onSubmit={this.handleSubmit}>
+              <p>Submit a link to your playlist!</p>
+              <input type="text" name="link" value={this.state.link} onChange={this.handleChange}/>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
           
 
           <Playlist data={this.state.playlistData}  />
@@ -149,14 +155,6 @@ class Spotify extends React.Component {
               clientID='829c9df647804f28b37c2388cf43e2b7'
               scopes={[Scopes.userReadPrivate, 'user-read-email']}
             />
-
-            <div>
-          <form id="linkForm" onSubmit={this.handleSubmit}>
-            <p>Submit a link to your playlist!</p>
-            <input type="text" name="link" value={this.state.link} onChange={this.handleChange}/>
-            <input type="submit" value="Submit" />
-          </form>
-          </div>
 
         </div>  
         )}

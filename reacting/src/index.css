@@ -26,8 +26,20 @@ div{
   margin: 2%;
 }
 
+nav{
+  display: inline-flex;
+  font-size: 1.5em;
+  width: 100%;
+  background-color: #191414;
+}
+
+nav > a{
+  margin: 0 1em;
+  color: white !important;
+}
+
 .app{
-  padding: 5%;
+  padding: 2%;
 }
 
 .display{
@@ -60,6 +72,14 @@ div{
 }
 
 a{
+  color: #191414 !important;
+}
+
+h4 > a{
+  color: #3d3b3b !important;
+}
+
+h4 > a:hover{
   color: #191414 !important;
 }
 
