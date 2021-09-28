@@ -8,6 +8,7 @@ import Playlist from './Playlist'
 import Stats from './Stats'
 import Tracks from './Tracks'
 import Login from './Login'
+import About from './About'
 
 class Spotify extends React.Component {
 
@@ -130,13 +131,7 @@ class Spotify extends React.Component {
             {/* <p>You are authorized with token: {this.state.token}</p> */}
         <div className="display">
 
-          <div>
-          <form onSubmit={this.handleSubmit}>
-            <p>Submit a link to your playlist!</p>
-            <input name="link" value={this.state.link} onChange={this.handleChange}/>
-            <input type="submit" value="Submit" />
-          </form>
-          </div>
+          {/* FORM GOES HERE */}
           
 
           <Playlist data={this.state.playlistData}  />
@@ -150,10 +145,19 @@ class Spotify extends React.Component {
         <div>
             <Login />
             <SpotifyAuth
-              redirectUri='http://localhost:3000/callback'
+              redirectUri='https://statlistfy.netlify.app/'
               clientID='829c9df647804f28b37c2388cf43e2b7'
               scopes={[Scopes.userReadPrivate, 'user-read-email']}
             />
+
+            <div>
+          <form id="linkForm" onSubmit={this.handleSubmit}>
+            <p>Submit a link to your playlist!</p>
+            <input type="text" name="link" value={this.state.link} onChange={this.handleChange}/>
+            <input type="submit" value="Submit" />
+          </form>
+          </div>
+
         </div>  
         )}
 

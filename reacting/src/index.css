@@ -18,6 +18,10 @@ p{
   line-height: 1em;
 }
 
+h1{
+  font-size: 3em !important;
+}
+
 div{
   margin: 2%;
 }
@@ -81,4 +85,37 @@ a{
 
 a:hover{
   color: #9e9595 !important;
+}
+
+#linkForm{
+  font-size: 2em;
+}
+
+
+#linkForm > input{
+  outline: none;
+  border: 0;
+}
+
+#linkForm > input[type=submit]{
+  background-color: #191414;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
+
+#linkForm > input[type=text]{
+  border-radius: 5px 0 0 5px;
+}
+
+button{
+  font-size: 1.5em !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif !important;
+  margin-left: 2% !important;
+  padding-left: 0 !important;
+}
+
+h4{
+  font-weight: normal !important;
 }
