@@ -6,8 +6,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: whitesmoke !important;
-
+  min-width: 300px;
 }
+
+  @media (max-width: 600px) {
+    .app{
+      font-size: 14px !important;
+    }
+  }
+  @media (max-width: 400px) {
+    .app{
+      font-size: 12px !important;
+    }
+  }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -15,11 +26,11 @@ code {
 }
 
 p{
-  line-height: 1em;
+  line-height: 0.85em;
 }
 
 h1{
-  font-size: 3em !important;
+  font-size: 2.5em !important;
 }
 
 div{
@@ -31,6 +42,7 @@ nav{
   font-size: 1.5em;
   width: 100%;
   background-color: #191414;
+  padding: 1%;
 }
 
 nav > a{
@@ -38,9 +50,7 @@ nav > a{
   color: white !important;
 }
 
-.app{
-  padding: 2%;
-}
+
 
 .display{
   display: inline-flex;
@@ -55,11 +65,11 @@ nav > a{
   background-color: #191414;
   padding: 5%;
   width: 50%;
-  min-width: 300px;
+  min-width: 280px;
 }
 
 .stats{
-  min-width: 300px;
+  min-width: 280px;
 }
 
 .playlist{
@@ -71,18 +81,6 @@ nav > a{
   color: white !important;
 }
 
-a{
-  color: #191414 !important;
-}
-
-h4 > a{
-  color: #3d3b3b !important;
-}
-
-h4 > a:hover{
-  color: #191414 !important;
-}
-
 .stats{
   background-color: #191414;
   padding: 5%;
@@ -90,17 +88,19 @@ h4 > a:hover{
 }
 
 #playlistImg{
-  width: 300px;
-  height: 300px;
+  width: 275px;
+  height: 275px;
 }
 
 .info{
-  min-width: 300px;
-  width: 50%;
+  min-width: 275px;
+  width: 60%;
+  margin-left: 5%;
 }
 
 a{
   text-decoration: none !important;
+  color: #3d3b3b !important;
 }
 
 a:hover{
@@ -109,6 +109,7 @@ a:hover{
 
 #linkForm{
   font-size: 2em;
+  width: 100%;
 }
 
 

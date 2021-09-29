@@ -7,30 +7,28 @@ import {
   Switch,
   Route,
   Link
-} from "react-router-dom"
-
+} from 'react-router-dom'
 
 function App () {
-    return (
-      <Router>
-      <div className="app">
+  return (
+    <Router>
+      <div className='app'>
         <nav>
-              <Link to="/">Home</Link>
-              <Link to="/about">About</Link>
+          <Link to='/'>Home</Link>
+          <Link to='/about'>About</Link>
         </nav>
 
         <Switch>
-          <Route path="/about">
+          <Route path='/about'>
             <About />
           </Route>
-          <Route path="/">
+          <Route path='/'>
             <Spotify />
           </Route>
         </Switch>
       </div>
     </Router>
-    )
+  )
 }
-
 
 export default App
