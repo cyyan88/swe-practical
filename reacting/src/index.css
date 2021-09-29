@@ -9,9 +9,31 @@ body {
   min-width: 300px;
 }
 
-  @media (max-width: 600px) {
-    .app{
-      font-size: 14px !important;
+@media (max-width: 600px)  {
+  .app{
+    font-size: 16px !important;
+    margin: auto;
+  }
+}
+  @media (max-width: 900px) {
+    .tracks{
+      width: 100% !important;
+      font-size: 1.25em !important;
+      padding: 5% !important;
+    }
+    .stats{
+      width: 100% !important;
+      font-size: 1.25em !important;
+      padding: 10% !important;
+    }
+    .info{
+      width: 100% !important;
+    }
+    #playlistImg{
+      margin-left: 5%;
+    }
+    #linkForm{
+      margin: 3%;
     }
   }
   @media (max-width: 400px) {
@@ -26,7 +48,7 @@ code {
 }
 
 p{
-  line-height: 0.85em;
+  line-height: 1em;
 }
 
 h1{
@@ -34,15 +56,20 @@ h1{
 }
 
 div{
-  margin: 2%;
+  margin: 1%;
 }
 
 nav{
   display: inline-flex;
-  font-size: 1.5em;
+  font-size: 2.5em;
   width: 100%;
   background-color: #191414;
   padding: 1%;
+}
+
+a:hover{
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 nav > a{
@@ -63,13 +90,53 @@ nav > a{
   overflow-y: scroll;
   color: white;
   background-color: #191414;
-  padding: 5%;
+  padding: 4%;
   width: 50%;
   min-width: 280px;
 }
 
 .stats{
   min-width: 280px;
+  width: 40%;
+}
+
+.statsInfo{
+  background-color: #3d3b3b;
+  color: white;
+  padding: 2%;
+  margin: 0;
+  margin-top: 2%;
+}
+
+.statsInfo > p > a{
+  color: #9e9595 !important;
+}
+
+.statsInfo > p > a:hover{
+  color: white !important;
+}
+
+.statsDetails{
+  display: inline-flex;
+}
+
+.statsDetails > div{
+  margin: 0;
+  margin-right: 5%;
+}
+
+.statsDetails > p{
+  line-height: 1.25em;
+}
+
+.infoDisplay > a > p{
+  line-height: 0.25em !important;
+}
+.infoDisplay > a{
+  color: white !important;
+}
+.infoDisplay > a:hover{
+  color: #9e9595 !important;
 }
 
 .playlist{
@@ -83,7 +150,7 @@ nav > a{
 
 .stats{
   background-color: #191414;
-  padding: 5%;
+  padding: 3%;
   color:white;
 }
 
@@ -107,8 +174,21 @@ a:hover{
   color: #9e9595 !important;
 }
 
+h4 > a {
+  text-decoration: underline !important;
+}
+
+.linkForm{
+  width: 100%;
+  text-align: center;
+  padding: 5%;
+  background-color: #3d3b3b;
+  color: white;
+  margin-bottom: 5%;
+}
+
 #linkForm{
-  font-size: 2em;
+  font-size: 1.25em;
   width: 100%;
 }
 
@@ -126,6 +206,11 @@ a:hover{
 
 #linkForm > input[type=text]{
   border-radius: 5px 0 0 5px;
+  width: 60%;
+}
+
+#linkForm > p{
+  margin-bottom: 0.5em;
 }
 
 button{

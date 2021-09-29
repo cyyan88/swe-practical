@@ -1,5 +1,4 @@
 import React from 'react'
-import TrackInfo from './TrackInfo'
 
 function Tracks (props) {
   const tracks = props.tracks
@@ -11,7 +10,6 @@ function Tracks (props) {
       <div className='tracks'>
         <h3>Playlist Tracks</h3>
         {trackDisplay}
-        <TrackInfo />
       </div>
     )
   } else {
