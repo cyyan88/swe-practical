@@ -17,14 +17,9 @@ function App () {
           <Link to='/'>Home</Link>
           <Link to='/about'>About</Link>
         </nav>
-
         <Switch>
-          <Route path='/about'>
-            <About />
-          </Route>
-          <Route path='/'>
-            <Spotify />
-          </Route>
+          <Route path='/about'><About /></Route>
+          <Route path='/'><Spotify /></Route>
         </Switch>
       </div>
     </Router>

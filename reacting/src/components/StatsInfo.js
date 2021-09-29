@@ -6,7 +6,6 @@ function StatsInfo () {
 
   function showInfo (key) {
     setInfo(info[key])
-    // console.log(key)
   }
 
   const infoDisplay = Object.keys(info).map(stat =>

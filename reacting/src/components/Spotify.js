@@ -8,7 +8,6 @@ import Playlist from './Playlist'
 import Stats from './Stats'
 import Tracks from './Tracks'
 import Login from './Login'
-import About from './About'
 
 class Spotify extends React.Component {
   constructor () {
@@ -101,13 +100,6 @@ class Spotify extends React.Component {
     this.fetchAPI(`https://api.spotify.com/v1/playlists/${id}`, 'playlist')
   }
 
-  componentDidMount () {
-    if (this.state.token && JSON.stringify(this.state.playlistData) == '{}') {
-      if (this.state.playlistId != undefined) this.getPlaylist(this.state.playlistId)
-      else this.getPlaylist('37i9dQZF1DZ06evO4kAIIU')
-    }
-  }
-
   getTrack (id) {
     this.fetchAPI(`https://api.spotify.com/v1/audio-features/${id}`, 'track')
   }
@@ -130,13 +122,19 @@ class Spotify extends React.Component {
     this.setState({ link: event.target.value })
   }
 
+  componentDidMount () {
+    if (this.state.token && JSON.stringify(this.state.playlistData) == '{}') {
+      if (this.state.playlistId != undefined) this.getPlaylist(this.state.playlistId)
+      else this.getPlaylist('37i9dQZF1DZ06evO4kAIIU')
+    }
+  }
+
   render () {
     return (
       <div className='app'>
         {this.state.token ? (
           <SpotifyApiContext.Provider value={this.state.token}>
             <div className='display'>
-
               <div className='linkForm'>
                 <form id='linkForm' onSubmit={this.handleSubmit}>
                   <h4>✨Playlist Link✨</h4>
@@ -144,13 +142,11 @@ class Spotify extends React.Component {
                   <input type='submit' value='Submit' />
                 </form>
               </div>
-
               <Playlist data={this.state.playlistData} />
               <Stats stats={this.state.stats} len={this.state.playlistData} />
               <Tracks tracks={this.state.allTracks} />
             </div>
           </SpotifyApiContext.Provider>
-
         ) : (
           <div>
             <Login />
@@ -162,7 +158,6 @@ class Spotify extends React.Component {
             />
           </div>
         )}
-
       </div>
     )
   }

@@ -2,8 +2,6 @@ import React from 'react'
 import { render } from 'react-dom'
 
 function Stats (props) {
-  // const data = props.data
-
   const stats = props.stats
   let len = 1
   if (JSON.stringify(props.len) != '{}' && JSON.stringify(props.len) != 'undefined') {

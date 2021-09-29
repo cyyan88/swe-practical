@@ -12,7 +12,6 @@ function Playlist (props) {
           <h3>{data.description}</h3>
           <a href={data.owner.external_urls.spotify} target='_blank'><h2>{data.owner.display_name}</h2></a>
         </div>
-
       </div>
     )
   } else {
