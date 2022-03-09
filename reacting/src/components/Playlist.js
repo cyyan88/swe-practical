@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 
 function Playlist (props) {
   const data = props.data
-  if (data.error) { return (<div>Invalid playlist link</div>) } else if (JSON.stringify(data) != '{}' && JSON.stringify(data) != 'undefined') {
+  if (data.error) { return (<div>Invalid playlist link</div>) } else if (JSON.stringify(data) !== '{}' && JSON.stringify(data) !== 'undefined') {
     return (
       <div className='playlist'>
         <img id='playlistImg' src={data.images[0].url} />

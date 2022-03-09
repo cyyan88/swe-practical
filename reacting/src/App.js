@@ -18,12 +18,12 @@ function App () {
         <nav>
           <Link to='/'>Home</Link>
           <Link to='/about'>About</Link>
-          <Link to='/me'>My Playlists</Link>
+          <Link to='/me'>Me</Link>
         </nav>
         <Switch>
           <Route path='/about'><About /></Route>
-          <Route path='/'><Spotify /></Route>
           <Route path='/me'><UserPlaylists /></Route>
+          <Route path='/'><Spotify /></Route>
         </Switch>
       </div>
     </Router>

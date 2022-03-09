@@ -9,6 +9,8 @@ import Stats from './Stats'
 import Tracks from './Tracks'
 import Login from './Login'
 
+import Context from '../Context'
+
 class Spotify extends React.Component {
   constructor () {
     super()
@@ -44,7 +46,7 @@ class Spotify extends React.Component {
     this.setState((prev) => {
       const newStats = prev.stats
       Object.keys(track).forEach(s => {
-        if (newStats[s] != null) {
+        if (newStats[s] !== null) {
           const prev = newStats[s]
           newStats[s] = track[s] + prev
         }
@@ -68,9 +70,9 @@ class Spotify extends React.Component {
       .then(response => response.json())
       .then(data => {
         if (data.error) alert('Invalid playlist link 🤧')
-        else if (type == 'track') {
+        else if (type === 'track') {
           this.updateStats(data)
-        } else if (type == 'userPlaylists') { this.setState({ userData: data }) } else if (type == 'playlist') {
+        } else if (type === 'userPlaylists') { this.setState({ userData: data }) } else if (type === 'playlist') {
           this.setState({ playlistData: { ...data } })
           this.setState({ allTracks: data.tracks.items })
           this.setState({
@@ -123,8 +125,8 @@ class Spotify extends React.Component {
   }
 
   componentDidMount () {
-    if (this.state.token && JSON.stringify(this.state.playlistData) == '{}') {
-      if (this.state.playlistId != undefined) this.getPlaylist(this.state.playlistId)
+    if (this.state.token && JSON.stringify(this.state.playlistData) === '{}') {
+      if (this.state.playlistId !== undefined) this.getPlaylist(this.state.playlistId)
       else this.getPlaylist('37i9dQZF1DZ06evO4kAIIU')
     }
   }

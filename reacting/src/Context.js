@@ -45,4 +45,5 @@ const ContextProvider = props => {
   );
 };
 
-export { Context, ContextProvider };
+//export { Context, ContextProvider };
+export default Context

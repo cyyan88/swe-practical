@@ -1,22 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react'
 import 'react-spotify-auth/dist/index.css'
-import { Context } from "../Context";
+import Context from "../Context"
+import Cookies from 'js-cookie'
 
 const UserPlaylists = props => {
 
-    console.log('exists??')
+    //console.log('exists??')
          
-    const {context, dispatch} = useContext(Context);
-    const [token, setToken] = useState(context.token);
+    //const {context, dispatch} = useContext(Context);
+    const [token, setToken] = useState(Cookies.get('spotifyAuthToken')); //useState(context.token);
     const [userData, setData] = useState([]);
 
     useEffect(() => {
-        console.log('user playlists...')
+        setToken(Cookies.get('spotifyAuthToken'))
         fetchAPI()
     }, [])
 
     const fetchAPI = () => {
-        const link = 'https://api.spotify.com/v1/users/glisteningpandas/playlists'
+        //const link = 'https://api.spotify.com/v1/users/glisteningpandas/playlists'
+        const link = 'https://api.spotify.com/v1/me/playlists'
         const header = {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -37,7 +39,7 @@ const UserPlaylists = props => {
     }
     
     return(
-        <div>
+        <div className="UserPlaylists">
             <h1>test...</h1>
         </div>
     )
