@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import 'react-spotify-auth/dist/index.css'
-import Context from "../Context"
 import Cookies from 'js-cookie'
 
 const UserPlaylists = props => {
 
-    //console.log('exists??')
-         
-    //const {context, dispatch} = useContext(Context);
-    const [token, setToken] = useState(Cookies.get('spotifyAuthToken')); //useState(context.token);
-    const [userData, setData] = useState([]);
+    const [token, setToken] = useState(Cookies.get('spotifyAuthToken'))
+    const [userData, setData] = useState([])
 
     useEffect(() => {
         setToken(Cookies.get('spotifyAuthToken'))

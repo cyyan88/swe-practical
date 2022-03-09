@@ -9,8 +9,6 @@ import Stats from './Stats'
 import Tracks from './Tracks'
 import Login from './Login'
 
-import Context from '../Context'
-
 class Spotify extends React.Component {
   constructor () {
     super()
