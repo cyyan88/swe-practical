@@ -2,9 +2,9 @@ import React from 'react'
 
 function Tracks (props) {
   const tracks = props.tracks
-  if (JSON.stringify(tracks) != '{}' && JSON.stringify(tracks) != 'undefined') {
+  if (JSON.stringify(tracks) !== '{}' && JSON.stringify(tracks) !== 'undefined') {
     const trackDisplay = tracks.map(track =>
-      <a href={track.track.external_urls.spotify} target='_blank'><p>{track.track.name}</p></a>
+      <a href={track.track.external_urls.spotify} target='_blank' rel="noreferrer"><p>{track.track.name}</p></a>
     )
     return (
       <div className='tracks'>

@@ -221,3 +221,11 @@ h4{
 #linkForm > p{
   margin-bottom: 0.5em;
 }
+
+.allPlaylists{
+  padding: 2% 0 5% 0;
+}
+
+.allPlaylists > a > p{
+  line-height: 0.5em;
+}
