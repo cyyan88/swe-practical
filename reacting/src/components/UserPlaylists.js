@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import 'react-spotify-auth/dist/index.css'
 import Cookies from 'js-cookie'
+import AllPlaylists from './AllPlaylists'
 
 const UserPlaylists = props => {
 
@@ -13,7 +14,6 @@ const UserPlaylists = props => {
     }, [])
 
     const fetchAPI = () => {
-        //const link = 'https://api.spotify.com/v1/users/glisteningpandas/playlists'
         const link = 'https://api.spotify.com/v1/me/playlists'
         const header = {
           Accept: 'application/json',
@@ -26,17 +26,23 @@ const UserPlaylists = props => {
         })
         .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setData(data)
-            })
-            .catch(err => {
-                console.log(err)
             })
     }
     
     return(
         <div className="UserPlaylists">
-            <h1>test...</h1>
+            {!token ? (
+                <p>Please <a href="/">login</a> first.</p>
+            ): 
+            (
+                <div>
+                    <h2>My Public Playlists</h2>
+                    <AllPlaylists data={userData}/>
+                </div>
+            )
+            }
+
         </div>
     )
     

@@ -8,9 +8,9 @@ function Playlist (props) {
       <div className='playlist'>
         <img id='playlistImg' src={data.images[0].url} />
         <div className='info'>
-          <a href={data.external_urls.spotify} target='_blank'><h1>{data.name}</h1></a>
+          <a href={data.external_urls.spotify} target='_blank' rel="noreferrer"><h1>{data.name}</h1></a>
           <h3>{data.description}</h3>
-          <a href={data.owner.external_urls.spotify} target='_blank'><h2>{data.owner.display_name}</h2></a>
+          <a href={data.owner.external_urls.spotify} target='_blank' rel="noreferrer"><h2>{data.owner.display_name}</h2></a>
         </div>
       </div>
     )

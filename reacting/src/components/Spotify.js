@@ -151,8 +151,8 @@ class Spotify extends React.Component {
           <div>
             <Login />
             <SpotifyAuth
-              // redirectUri='https://statlistfy.netlify.app/'
-              redirectUri='http://localhost:3000/callback'
+              redirectUri='https://statlistfy.netlify.app/'
+              // redirectUri='http://localhost:3000/callback'
               clientID='829c9df647804f28b37c2388cf43e2b7'
               scopes={[Scopes.userReadPrivate, 'user-read-email']}
             />

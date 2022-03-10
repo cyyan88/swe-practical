@@ -15,7 +15,7 @@ function StatsInfo () {
   return (
     <div className='statsInfo'>
       <h3>Playlist Stats Details</h3>
-      <p>Taken from <a href='https://developer.spotify.com/documentation/web-api/reference/#object-audiofeaturesobject' target='_blank'>Spotify's Web API Reference</a></p>
+      <p>Taken from <a href='https://developer.spotify.com/documentation/web-api/reference/#object-audiofeaturesobject' target='_blank' rel="noreferrer">Spotify's Web API Reference</a></p>
       <div className='statsDetails'>
         <div className='infoDisplay'>
           {infoDisplay}
