@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import { SpotifyAuth, Scopes } from 'react-spotify-auth'
 import 'react-spotify-auth/dist/index.css'
 import { SpotifyApiContext } from 'react-spotify-api'
@@ -9,57 +10,44 @@ import Stats from './Stats'
 import Tracks from './Tracks'
 import Login from './Login'
 
-class Spotify extends React.Component {
-  constructor () {
-    super()
-    this.state = {
-      token: Cookies.get('spotifyAuthToken'),
-      trackData: {},
-      allTracks: {},
-      userData: {},
-      playlistData: {},
-      stats: {
-        acousticness: 0,
-        danceability: 0,
-        duration_ms: 0,
-        energy: 0,
-        instrumentalness: 0,
-        liveness: 0,
-        loudness: 0,
-        speechiness: 0,
-        tempo: 0,
-        valence: 0
-      },
-      playlistId: Cookies.get('playlistId'),
-      link: 'https://open.spotify.com/playlist/37i9dQZF1DZ06evO4kAIIU?si=937547c672cd4b9b'
-    }
-    this.fetchAPI = this.fetchAPI.bind(this)
-    this.updateStats = this.updateStats.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+const Spotify = props => {
+
+  const [token, setToken] =useState(Cookies.get('spotifyAuthToken'))
+  const [trackData, setTrackData] = useState({})
+  const [allTracks, setAllTracks] = useState({})
+  const [playlistData, setPlaylist] = useState({})
+  const defaultStats = {
+    acousticness: 0,
+    danceability: 0,
+    duration_ms: 0,
+    energy: 0,
+    instrumentalness: 0,
+    liveness: 0,
+    loudness: 0,
+    speechiness: 0,
+    tempo: 0,
+    valence: 0
+  }
+  const [stats, setStats] = useState(defaultStats)
+  const [playlistId, setPlaylistId] = useState(Cookies.get('playlistId'))
+  const [link, setLink] = useState('https://open.spotify.com/playlist/37i9dQZF1DZ06evO4kAIIU?si=937547c672cd4b9b')
+
+
+  const updateStats = track => {
+    let newStats = stats
+    Object.keys(track).forEach(s => {
+      if (s in stats) {
+        const prev = track[s]
+        newStats[s] = newStats[s] + prev
+      }})
+    setStats(newStats)
   }
 
-  updateStats (track) {
-    this.setState((prev) => {
-      const newStats = prev.stats
-      Object.keys(track).forEach(s => {
-        if (newStats[s] !== null) {
-          const prev = newStats[s]
-          newStats[s] = track[s] + prev
-        }
-      })
-      return {
-        stats: { ...newStats }
-      }
-    })
-  }
-
-  fetchAPI (link, type) {
+  const fetchAPI = (link, type) => {
     const header = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.state.token}`
+      Authorization: `Bearer ${token}`
     }
     fetch(link, {
       method: 'GET',
@@ -69,98 +57,84 @@ class Spotify extends React.Component {
       .then(data => {
         if (data.error) alert('Invalid playlist link 🤧')
         else if (type === 'track') {
-          this.updateStats(data)
-        } else if (type === 'userPlaylists') { this.setState({ userData: data }) } else if (type === 'playlist') {
-          this.setState({ playlistData: { ...data } })
-          this.setState({ allTracks: data.tracks.items })
-          this.setState({
-            stats: {
-              acousticness: 0,
-              danceability: 0,
-              duration_ms: 0,
-              energy: 0,
-              instrumentalness: 0,
-              liveness: 0,
-              loudness: 0,
-              speechiness: 0,
-              tempo: 0,
-              valence: 0
-            }
-          })
-          this.plTracks(data.tracks)
+          updateStats(data)
+        } 
+        else if (type === 'playlist') {
+          console.log(data)
+          setPlaylist(data) 
+          setAllTracks(data.tracks.items)
+          setStats(defaultStats)
+          plTracks(data.tracks)
         }
       })
+      .catch(err => console.log(err))
   }
 
-  getUserPlaylists () {
-    this.fetchAPI('https://api.spotify.com/v1/users/glisteningpandas/playlists', 'userPlaylists')
+  const getPlaylist = id => {
+    fetchAPI(`https://api.spotify.com/v1/playlists/${id}`, 'playlist')
   }
 
-  getPlaylist (id) {
-    this.fetchAPI(`https://api.spotify.com/v1/playlists/${id}`, 'playlist')
+  const getTrack = id => {
+    fetchAPI(`https://api.spotify.com/v1/audio-features/${id}`, 'track')
   }
 
-  getTrack (id) {
-    this.fetchAPI(`https://api.spotify.com/v1/audio-features/${id}`, 'track')
-  }
-
-  plTracks (tracks) {
+  const plTracks = tracks => {
     tracks.items.forEach(t => {
-      this.getTrack(t.track.id)
+      getTrack(t.track.id)
     })
   }
 
-  handleSubmit (event) {
+  const handleSubmit = event => {
     event.preventDefault()
-    const id = this.state.link.substring(this.state.link.indexOf('playlist/') + 9, this.state.link.indexOf('?si'))
-    this.setState({ playlistId: { id } })
+    const end = link.indexOf('?si') != -1 ? link.indexOf('?si'): link.length
+    const id = link.substring(link.indexOf('playlist/') + 9, end)
+    setPlaylistId(id)
     Cookies.set('playlistId', id)
-    this.getPlaylist(id)
+    getPlaylist(id)
   }
 
-  handleChange (event) {
-    this.setState({ link: event.target.value })
+  const handleChange = event => {
+    setLink(event.target.value)
   }
 
-  componentDidMount () {
-    if (this.state.token && JSON.stringify(this.state.playlistData) === '{}') {
-      if (this.state.playlistId !== undefined) this.getPlaylist(this.state.playlistId)
-      else this.getPlaylist('37i9dQZF1DZ06evO4kAIIU')
+  useEffect(() => {
+    if (token && JSON.stringify(playlistData) === '{}') {
+      if (playlistId !== undefined) getPlaylist(playlistId)
+      else getPlaylist('37i9dQZF1DZ06evO4kAIIU')
     }
-  }
+  }, [])
 
-  render () {
-    return (
-      <div className='app'>
-        {this.state.token ? (
-          <SpotifyApiContext.Provider value={this.state.token}>
-            <div className='display'>
-              <div className='linkForm'>
-                <form id='linkForm' onSubmit={this.handleSubmit}>
-                  <h4>✨Playlist Link✨</h4>
-                  <input type='text' name='link' value={this.state.link} onChange={this.handleChange} />
-                  <input type='submit' value='Submit' />
-                </form>
-              </div>
-              <Playlist data={this.state.playlistData} />
-              <Stats stats={this.state.stats} len={this.state.playlistData} />
-              <Tracks tracks={this.state.allTracks} />
+  return (
+    <div className='app'>
+      {token ? (
+        <SpotifyApiContext.Provider value={token}>
+          <div className='display'>
+            <div className='linkForm'>
+              <form id='linkForm' onSubmit={handleSubmit}>
+                <h4>✨Playlist Link✨</h4>
+                <input type='text' name='link' value={link} onChange={handleChange} />
+                <input type='submit' value='Submit' />
+              </form>
             </div>
-          </SpotifyApiContext.Provider>
-        ) : (
-          <div>
-            <Login />
-            <SpotifyAuth
-              redirectUri='https://statlistfy.netlify.app/'
-              // redirectUri='http://localhost:3000/callback'
-              clientID='829c9df647804f28b37c2388cf43e2b7'
-              scopes={[Scopes.userReadPrivate, 'user-read-email']}
-            />
+            <Playlist data={playlistData} />
+            <Stats stats={stats} len={playlistData} />
+            <Tracks tracks={allTracks} />
           </div>
-        )}
-      </div>
-    )
-  }
+        </SpotifyApiContext.Provider>
+      ) : (
+        <div>
+          <Login />
+          <SpotifyAuth
+            // redirectUri='https://statlistfy.netlify.app/'
+            redirectUri='http://localhost:3000/callback'
+            clientID='829c9df647804f28b37c2388cf43e2b7'
+            scopes={[Scopes.userReadPrivate, 'user-read-email']}
+          />
+        </div>
+      )}
+    </div>
+  )
+  
 }
 
 export default Spotify
