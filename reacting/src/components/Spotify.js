@@ -16,6 +16,8 @@ const Spotify = props => {
   const [trackData, setTrackData] = useState({})
   const [allTracks, setAllTracks] = useState({})
   const [playlistData, setPlaylist] = useState({})
+
+
   const defaultStats = {
     acousticness: 0,
     danceability: 0,
@@ -62,6 +64,7 @@ const Spotify = props => {
         else if (type === 'playlist') {
           console.log(data)
           setPlaylist(data) 
+          Cookies.set('playlistData', JSON.stringify(data))
           setAllTracks(data.tracks.items)
           setStats(defaultStats)
           plTracks(data.tracks)
@@ -90,6 +93,7 @@ const Spotify = props => {
     const id = link.substring(link.indexOf('playlist/') + 9, end)
     setPlaylistId(id)
     Cookies.set('playlistId', id)
+    console.log(Cookies.get('playlistId'))
     getPlaylist(id)
   }
 
@@ -98,7 +102,12 @@ const Spotify = props => {
   }
 
   useEffect(() => {
+    if(Cookies.get('playlistData')){
+      setPlaylist(JSON.parse(Cookies.get('playlistData')))
+    }
     if (token && JSON.stringify(playlistData) === '{}') {
+      console.log('getting playlist')
+    //if(token){ && JSON.stringify(playlistData) === undefined){
       if (playlistId !== undefined) getPlaylist(playlistId)
       else getPlaylist('37i9dQZF1DZ06evO4kAIIU')
     }
